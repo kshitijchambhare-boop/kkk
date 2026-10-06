@@ -1,0 +1,19 @@
+# Optional Render "Blueprint": Render dashboard -> New -> Blueprint -> pick this repo.
+services:
+  - type: web
+    name: soilcare-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false        # paste your Atlas connection string in the dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false        # e.g. https://USERNAME.github.io
