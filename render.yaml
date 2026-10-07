@@ -3,7 +3,6 @@ services:
   - type: web
     name: soilcare-api
     runtime: node
-    rootDir: backend
     plan: free
     buildCommand: npm install
     startCommand: npm start

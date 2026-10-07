@@ -1,5 +1,5 @@
 require('dotenv').config();
-const bcrypt = require('bcryptjs'), mongoose = require('mongoose'), User = require('./models/User'), Crop = require('./models/Crop'), Fertilizer = require('./models/Fertilizer');
+const bcrypt = require('bcryptjs'), mongoose = require('mongoose'), User = require('./User'), Crop = require('./Crop'), Fertilizer = require('./Fertilizer');
 const crops = [
  ['Wheat',6.8,'Medium','Medium','Medium','Medium',['Loamy','Clay'],'Rabi cereal; sow Nov–Dec.'],['Rice',6.0,'High','Medium','Medium','High',['Clay','Loamy'],'Needs standing water.'],
  ['Maize',6.5,'High','Medium','Medium','Medium',['Loamy','Sandy'],'Warm-season cereal.'],['Cotton',7.0,'Medium','Low','Medium','Medium',['Black','Loamy'],'Fibre crop for deep black soils.'],

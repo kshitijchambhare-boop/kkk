@@ -2,7 +2,9 @@
 
 ## 🌱 LIVE DEMO
 
-**[Open SoilCare Project](YOUR_LIVE_FRONTEND_URL)**   ← replace with `https://USERNAME.github.io/REPOSITORY-NAME/`
+**[Open SoilCare Project](https://kshitijchambhare-boop.github.io/kkk/)**
+
+To publish the frontend, open **Actions → Deploy frontend to GitHub Pages → Run workflow**. For sign-in and saved records on the hosted site, set the Actions variable `VITE_API_URL` to the public backend API URL ending in `/api`.
 
 ## 🚀 Backend API
 
@@ -41,7 +43,6 @@ cd REPOSITORY-NAME
 ```
 **Backend** (needs MongoDB locally, or an Atlas URI)
 ```bash
-cd backend
 cp .env.example .env      # then fill in MONGO_URI and JWT_SECRET
 npm install
 npm run seed              # crops, fertilizers, demo users
@@ -81,15 +82,14 @@ Never commit `.env` files — they are git-ignored.
 
 ### 2. Seed the Atlas database (once, from your computer)
 ```bash
-cd backend
-# put the Atlas string in backend/.env as MONGO_URI (and optionally SEED_ADMIN_PASSWORD=...)
+# put the Atlas string in .env as MONGO_URI (and optionally SEED_ADMIN_PASSWORD=...)
 npm install
 npm run seed
 ```
 
 ### 3. Deploy the backend (Render)
 1. <https://render.com> → **New → Web Service** → connect the GitHub repo.
-2. Root Directory `backend`, Build `npm install`, Start `npm start`, Health check path `/health`. (Or use **New → Blueprint** with `render.yaml`.)
+2. Leave Root Directory empty (the backend package is at the repository root), Build `npm install`, Start `npm start`, Health check path `/health`. (Or use **New → Blueprint** with `render.yaml`.)
 3. Environment variables: `NODE_ENV=production`, `MONGO_URI`, `JWT_SECRET`, `FRONTEND_URL=https://USERNAME.github.io`.
 4. After deploy, open `https://YOUR-BACKEND.onrender.com/` — it should show `{"status":"Soil Fertility API running"}`. That URL is your **Backend API** link.
 
@@ -97,7 +97,7 @@ npm run seed
 1. Repo → **Settings → Secrets and variables → Actions → Variables → New repository variable**: name `VITE_API_URL`, value `https://YOUR-BACKEND.onrender.com/api`.
 2. Repo → **Settings → Pages → Source: GitHub Actions**.
 3. Push to `main` (or **Actions → Deploy frontend to GitHub Pages → Run workflow**). The workflow installs Node, installs dependencies, builds with the correct base path (`/REPOSITORY-NAME/`) and deploys.
-4. Your live URL: `https://USERNAME.github.io/REPOSITORY-NAME/` — put it in the **LIVE DEMO** line at the top of this README.
+4. Your live URL: `https://USERNAME.github.io/REPOSITORY-NAME/`.
 
 GitHub Pages cannot rewrite URLs, so the build also creates `404.html` (a copy of `index.html`); direct links like `/REPOSITORY-NAME/dashboard` and page refreshes load the app.
 

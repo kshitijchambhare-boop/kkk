@@ -1,6 +1,7 @@
-const r = require('express').Router(), { protect, adminOnly } = require('../middleware/auth');
-const a = require('../controllers/authController'), u = require('../controllers/userController'), s = require('../controllers/soilTestController');
-const crop = require('../controllers/crudFactory')(require('../models/Crop')), fert = require('../controllers/crudFactory')(require('../models/Fertilizer'));
+const r = require('express').Router(), { protect, adminOnly } = require('./auth');
+const a = require('./authController'), u = require('./userController'), s = require('./soilTestController');
+const crudFactory = require('./crudFactory');
+const crop = crudFactory(require('./Crop')), fert = crudFactory(require('./Fertilizer'));
 r.post('/auth/register', a.register); r.post('/auth/login', a.login); r.get('/auth/me', protect, a.me);
 r.get('/users', protect, adminOnly, u.list); r.get('/users/:id', protect, adminOnly, u.get); r.put('/users/:id', protect, u.update); r.delete('/users/:id', protect, adminOnly, u.remove);
 r.route('/soil-tests').post(protect, s.create).get(protect, s.list);

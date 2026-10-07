@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express'), cors = require('cors'), helmet = require('helmet'), rateLimit = require('express-rate-limit');
-const connectDB = require('./config/db'), { notFound, errorHandler } = require('./middleware/error');
+const connectDB = require('./db'), { notFound, errorHandler } = require('./error');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -30,7 +30,7 @@ app.use('/api/auth', rateLimit({ windowMs: 15 * 60 * 1000, limit: 100, standardH
 
 app.get('/', (q, res) => res.json({ status: 'Soil Fertility API running' }));
 app.get('/health', (q, res) => res.json({ ok: true }));
-app.use('/api', require('./routes')); app.use(notFound); app.use(errorHandler);
+app.use('/api', require('./index')); app.use(notFound); app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 connectDB().then(() => app.listen(PORT, () => console.log('Server on port ' + PORT)))

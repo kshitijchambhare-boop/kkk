@@ -1,5 +1,5 @@
 const esc = x => String(x).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const User = require('../models/User');
+const User = require('./User');
 exports.list = async (req, res, next) => { try { const s = req.query.search; res.json(await User.find(s ? { $or: [{ name: new RegExp(esc(s), 'i') }, { email: new RegExp(esc(s), 'i') }] } : {}).sort('-createdAt')); } catch (e) { next(e); } };
 exports.get = async (req, res, next) => { try { const u = await User.findById(req.params.id); u ? res.json(u) : res.status(404).json({ message: 'User not found' }); } catch (e) { next(e); } };
 exports.update = async (req, res, next) => { try {

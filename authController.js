@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs'), jwt = require('jsonwebtoken'), User = require('../models/User');
+const bcrypt = require('bcryptjs'), jwt = require('jsonwebtoken'), User = require('./User');
 const sign = u => jwt.sign({ id: u._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 exports.register = async (req, res, next) => { try {
   const { name, email, phone, password, location, village, district, state } = req.body;

@@ -1,5 +1,5 @@
-const SoilTest = require('../models/SoilTest'), Crop = require('../models/Crop'), Fertilizer = require('../models/Fertilizer'), Report = require('../models/Report'), User = require('../models/User');
-const { analyzeSoil } = require('../utils/soilAnalysis'), { recommendCrops } = require('../utils/cropRecommendation'), { recommendFertilizers } = require('../utils/fertilizerRecommendation');
+const SoilTest = require('./SoilTest'), Crop = require('./Crop'), Fertilizer = require('./Fertilizer'), Report = require('./Report'), User = require('./User');
+const { analyzeSoil } = require('./soilAnalysis'), { recommendCrops } = require('./cropRecommendation'), { recommendFertilizers } = require('./fertilizerRecommendation');
 const owned = (req, id) => SoilTest.findOne(req.user.role === 'admin' ? { _id: id } : { _id: id, userId: req.user._id });
 const fields = ['farmerName','location','village','district','state','soilType','crop','previousCrop','irrigationType','ph','nitrogen','phosphorus','potassium','organicCarbon','moisture','testDate','notes'];
 const applyAnalysis = t => Object.assign(t, analyzeSoil({ pH: t.ph, nitrogen: t.nitrogen, phosphorus: t.phosphorus, potassium: t.potassium, organicCarbon: t.organicCarbon, moisture: t.moisture }));
